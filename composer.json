@@ -1,0 +1,14 @@
+{
+    "name": "madepeople/magento1_budbee",
+    "description": "Budbee shipping integration for Magento",
+    "type": "magento-module",
+    "license": "BSD-4-Clause",
+    "authors": [
+        {
+            "name": "Arkadij Kuzhel",
+            "email": "arkadij@madepeople.se"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {}
+}
