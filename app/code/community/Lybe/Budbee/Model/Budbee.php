@@ -47,6 +47,10 @@ class Lybe_Budbee_Model_Budbee  extends Mage_Shipping_Model_Carrier_Abstract imp
         return $client;
     }
 
+    /**
+     * @return \Lybe_Budbee_Helper_Data
+     * @throws \Mage_Core_Exception
+     */
     protected function _getHelper()
     {
         return Mage::helper('lybe_budbee');
@@ -83,26 +87,33 @@ class Lybe_Budbee_Model_Budbee  extends Mage_Shipping_Model_Carrier_Abstract imp
      * Returns available shipping rates for Budbee
      *
      * @param Mage_Shipping_Model_Rate_Request $request
-     * @return Mage_Shipping_Model_Rate_Result
+     *
+     * @return Mage_Shipping_Model_Rate_Result|bool|null
      */
     public function collectRates(Mage_Shipping_Model_Rate_Request $request)
     {
-        if (!$this->_getHelper()->isEnabled())  return false;
+        if (!$this->_getHelper()->isEnabled() || !$this->showBudbeeAsShippingMethod()) {
+            return false;
+        }
 
         $is_Shippable = $this->_getHelper()->_isShippable($request->getAllItems());
+        if (!$is_Shippable) {
+            return false;
+        }
 
         /** @var Mage_Shipping_Model_Rate_Result $result */
         $result = Mage::getModel('shipping/rate_result');
 
-
         // check if there is date interval returned
         $validInterval = $this->getBudbeeIntervals();
 
-        if ($is_Shippable && $this->showBudbeeAsShippingMethod() && $validInterval)
+        if ($validInterval) {
             $result->append($this->_getExpressRate());
+        }
 
         return $result;
     }
+
     /**
      * Returns Allowed shipping methods
      *
