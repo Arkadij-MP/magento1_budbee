@@ -31,7 +31,7 @@ class Lybe_Budbee_Helper_Data extends Mage_Core_Helper_Abstract
     const SIMPLE_PRODUCT_TYPE = 'simple';
 
     const BUDBEE_LIVE_URL    = 'https://api.budbee.com'; // Production url
-    const BUDBEE_SANDBOX_URL = 'http://sandbox.api.budbee.com'; // Sandbox url
+    const BUDBEE_SANDBOX_URL = 'https://sandbox.api.budbee.com'; // Sandbox url
     const BUDBEE_LOCALHOST_URL = "http://localhost:9300"; // Internal development
 
     const BUDBEE_INTERVAL_BY_NUMBER = "carriers/lybe_budbee/interval_by_number";
